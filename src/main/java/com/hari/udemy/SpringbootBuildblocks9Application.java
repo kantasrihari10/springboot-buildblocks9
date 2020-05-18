@@ -10,6 +10,7 @@ public class SpringbootBuildblocks9Application {
 		SpringApplication.run(SpringbootBuildblocks9Application.class, args);
 		System.out.println("hai");
 		System.out.println("hari1");
+		System.out.println("hari3");
 	}
 
 }
