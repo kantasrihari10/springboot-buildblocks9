@@ -48,6 +48,7 @@ public class UserController {
 	{
 		userService.deleteUserById(id);
 	}
+	//get
 	@GetMapping("/users/byusername/{username}")
 	public User getUserByUsername(@PathVariable("username")String username)
 	{
