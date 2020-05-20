@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user", schema = "udemy")
@@ -14,12 +16,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+	@NotEmpty(message = "User name is Mandtory field. please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = true, unique =true)
+
 	private String username;
+	
 	@Column(name = "LAST_NAME", length = 50, nullable = false)
+	@Size(min=2,message ="Lastname atleast two charactors")
 	private String lastname;
 	@Column(name = "EMAIL", length = 50, nullable = false)
 	private String email;
+	@Size(min=2)
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
 	@Column(name = "SSN", length = 50, nullable = false, unique =true)
