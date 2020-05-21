@@ -3,7 +3,7 @@ package com.hari.udemy.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hari.udemy.modal.UserDetails;
+import com.hari.udemy.modal.Order1;
 
 @RestController
 public class HelloWorldController {
@@ -14,11 +14,10 @@ public class HelloWorldController {
 		
 	}
 
-	@RequestMapping("/hello2")
-	public UserDetails helloWorld2()
-	{
-		return new UserDetails("hari", "k", "hyd");
-		
-	}
+	/*
+	 * @RequestMapping("/hello2") public Order1 helloWorld2() { return new
+	 * Order1("hari", "k", "hyd");
+	 * 
+	 */
 	
 }

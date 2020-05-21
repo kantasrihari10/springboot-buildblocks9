@@ -1,10 +1,13 @@
 package com.hari.udemy.modal;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,20 +20,28 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	@NotEmpty(message = "User name is Mandtory field. please provide username")
-	@Column(name = "USER_NAME", length = 50, nullable = true, unique =true)
-
-	private String username;
-	
-	@Column(name = "LAST_NAME", length = 50, nullable = false)
-	@Size(min=2,message ="Lastname atleast two charactors")
+	@Column(name = "USER_NAME", length = 50, nullable = true, unique = true)
+    private String username;
+    @Column(name = "LAST_NAME", length = 50, nullable = false)
+	@Size(min = 2, message = "Lastname atleast two charactors")
 	private String lastname;
 	@Column(name = "EMAIL", length = 50, nullable = false)
 	private String email;
-	@Size(min=2)
+	@Size(min = 2)
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
-	@Column(name = "SSN", length = 50, nullable = false, unique =true)
+	@Column(name = "SSN", length = 50, nullable = false, unique = true)
 	private String ssn;
+ 	@OneToMany(mappedBy ="user")
+    private List<Order1> orders;
+	
+	public List<Order1> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order1> orders) {
+		this.orders = orders;
+	}
 
 	public User(Long id, String username, String lastname, String email, String role, String ssn) {
 		super();
@@ -95,6 +106,7 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", lastname=" + lastname + ", email=" + email + ", role="
 				+ role + ", ssn=" + ssn + "]";
 	}
+
 	public User() {
 		super();
 
