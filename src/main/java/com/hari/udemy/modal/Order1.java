@@ -10,10 +10,18 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Order1 {
+public class Order1  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long orderid;
+	public Long getOrderid() {
+		return orderid;
+	}
+
+	public void setOrderid(Long orderid) {
+		this.orderid = orderid;
+	}
+
 	private String orderNAme;
 	private String city;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,15 +36,7 @@ public class Order1 {
 		this.user = user;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getOrderNAme() {
+		public String getOrderNAme() {
 		return orderNAme;
 	}
 

@@ -61,19 +61,16 @@ public class OrderController {
 		  if(!optionaluser.isPresent()) { throw new
 		  UserNotFoundException("user not found ok"); }
 		  
-		  User user= optionaluser.get(); List<Order1> list=user.getOrders();
+		  //User user= optionaluser.get(); List<Order1> list=user.getOrders();
 		  
 		  Optional<Order1> order1= orderRepository.findById(id);
 		  if(!order1.isPresent()) { throw new
 		  UserNotFoundException("order not found ok"); } Order1 order2= order1.get();
 		
-		 for(Order1 order:list)
-		 {
-			 if(order.getId()==id)
-			 { 
-				 System.out.println("success");
-			 }
-	}
+		/*
+		 * for(Order1 order:list) { if(order.getId()==id) {
+		 * System.out.println("success"); } }
+		 */
 		 
 		  
 		 return order2;

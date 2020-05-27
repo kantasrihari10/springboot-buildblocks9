@@ -36,8 +36,8 @@ public class UserService {
 
 	}
 
-	public Optional<User> getUserById(Long id) throws UserNotFoundException {
-		Optional<User> user = userRepository.findById(id);
+	public Optional<User> getUserById(Long userid) throws UserNotFoundException {
+		Optional<User> user = userRepository.findById(userid);
 
 		if (!user.isPresent()) {
 			throw new UserNotFoundException("User Not found in user Repository");
@@ -47,13 +47,13 @@ public class UserService {
 
 	}
 
-	public User updateUserById(Long id, User user) throws UserNotFoundException {
-		Optional<User> optionaluser = userRepository.findById(id);
+	public User updateUserById(Long userid, User user) throws UserNotFoundException {
+		Optional<User> optionaluser = userRepository.findById(userid);
 		if(!optionaluser.isPresent())
 		{
 			throw new UserNotFoundException("User Not Found in user repository ,provide the correct user id");
 		}
-		user.setId(id);
+		user.setUserid(userid);
 		
 		return userRepository.save(user);
 	}

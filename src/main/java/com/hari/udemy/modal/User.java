@@ -12,13 +12,42 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
 @Entity
 @Table(name = "user", schema = "udemy")
-public class User {
+@JsonIgnoreProperties({"username","lastname"})
+public class User  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Long userid;
+	
+	public User(Long userid,
+			 String username,
+			String lastname, String email, String role, String ssn, List<Order1> orders) {
+		super();
+		this.userid = userid;
+		this.username = username;
+		this.lastname = lastname;
+		this.email = email;
+		this.role = role;
+		this.ssn = ssn;
+		this.orders = orders;
+	}
+
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
+	}
+
+
 	@NotEmpty(message = "User name is Mandtory field. please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = true, unique = true)
     private String username;
@@ -30,7 +59,9 @@ public class User {
 	@Size(min = 2)
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
+	
 	@Column(name = "SSN", length = 50, nullable = false, unique = true)
+	@JsonIgnore
 	private String ssn;
  	@OneToMany(mappedBy ="user")
     private List<Order1> orders;
@@ -43,23 +74,7 @@ public class User {
 		this.orders = orders;
 	}
 
-	public User(Long id, String username, String lastname, String email, String role, String ssn) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.lastname = lastname;
-		this.email = email;
-		this.role = role;
-		this.ssn = ssn;
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;
@@ -101,11 +116,6 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", lastname=" + lastname + ", email=" + email + ", role="
-				+ role + ", ssn=" + ssn + "]";
-	}
 
 	public User() {
 		super();

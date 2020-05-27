@@ -47,7 +47,7 @@ public class UserController {
 		try {
 			 userService.createUser(user);
           HttpHeaders httpHeaders=new HttpHeaders();
-          httpHeaders.setLocation(builder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+          httpHeaders.setLocation(builder.path("/users/{id}").buildAndExpand(user.getUserid()).toUri());
           return new ResponseEntity<Void>(httpHeaders,HttpStatus.CREATED);
           
 		} catch (UserExistsException ex) {
@@ -57,10 +57,10 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
+	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long userid) {
 
 		try {
-			return userService.getUserById(id);
+			return userService.getUserById(userid);
 		} catch (UserNotFoundException ex) {
 			
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
@@ -69,9 +69,9 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public User updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
+	public User updateUserById(@PathVariable("id") Long userid, @RequestBody User user) {
 		try {
-			return userService.updateUserById(id, user);
+			return userService.updateUserById(userid, user);
 		} catch (UserNotFoundException ex) {
 			
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
